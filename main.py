@@ -21,7 +21,7 @@ class Screen(QWidget):
     card_start_x = SCREEN_X/2 - card_w/2
     card_start_y = SCREEN_Y/2 - card_h/2
     card_pause_x = SCREEN_X/2 - card_w/2
-    card_pause_y = 0.42*SCREEN_Y - card_h/2
+    card_pause_y = 0.4275*SCREEN_Y - card_h/2
     card_end_x = SCREEN_X/2 - card_w/2
     card_end_y = SCREEN_Y/6 - card_h/2
     speed = 1000
