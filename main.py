@@ -12,7 +12,7 @@ from PyQt5.QtCore import (QPropertyAnimation, pyqtProperty, QRect,
                             Qt)
 
 SCREEN_X, SCREEN_Y = pyautogui.size()
-WORDS = read_words.get()
+WORDS = read_words.get_txt()
 INDEX = 0
 
 class Screen(QWidget):
