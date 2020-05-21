@@ -35,13 +35,13 @@ class Screen(QWidget):
 
         self.printerback = QLabel(self)
         self.printerback.setStyleSheet("QLabel {border-image: url(./images/printer-back.png) 0 0 0 0 stretch stretch}")
-        self.printerback.setGeometry(QRect(SCREEN_X/2 - 400, SCREEN_Y/2 - 400, 800, 800))
+        self.printerback.setGeometry(QRect(SCREEN_X/2 - SCREEN_X/4.2, SCREEN_Y/2 - SCREEN_Y/2.625, SCREEN_X/2.1, SCREEN_Y/1.3125))
         self.label = PrintCard(self, self.card_start_x, self.card_start_y,
                                             self.card_w, self.card_h)
         self.label.setText(self.chooseWord())
         self.printerfront = QLabel(self)
         self.printerfront.setStyleSheet("QLabel {border-image: url(./images/printer-front.png) 0 0 0 0 stretch stretch}")
-        self.printerfront.setGeometry(QRect(SCREEN_X/2 - 400, SCREEN_Y/2 - 400, 800, 800))
+        self.printerfront.setGeometry(QRect(SCREEN_X/2 - SCREEN_X/4.2, SCREEN_Y/2 - SCREEN_Y/2.625, SCREEN_X/2.1, SCREEN_Y/1.3125))
 
         self.gameover = QLabel(self)
         self.gameover.setVisible(False)
