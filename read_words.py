@@ -2,14 +2,14 @@ import csv
 import numpy as np
 
 def get_csv():
-    with open('./words.csv', newline='') as f:
+    with open('./words.csv', newline='', eoncding="utf8") as f:
         reader = csv.reader(f)
         data = list(reader)
     data = [d[0] for d in data]
     return data[1:]
 
 def get_txt():
-    with open("./words.txt", newline='') as f:
+    with open("./words.txt", newline='', encoding="utf8") as f:
         reader = csv.reader(f)
         data = list(reader)
     data = [d[0] for d in data]
