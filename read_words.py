@@ -1,0 +1,14 @@
+import csv
+import numpy as np
+
+def get():
+    with open('./words.csv', newline='') as f:
+        reader = csv.reader(f)
+        data = list(reader)
+    data = [d[0] for d in data]
+    return data[1:]
+
+def shuffle(words):
+    words_copy = np.array(words)
+    np.random.shuffle(words_copy)
+    return words_copy
