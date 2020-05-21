@@ -71,8 +71,9 @@ class Screen(QWidget):
         self.reprintbutton.clicked.connect(self.reprintButtonClicked)
         self.nextbutton.clicked.connect(self.nextButtonClicked)
         self.restartbutton.clicked.connect(self.restartButtonClicked)
+        self.exitbutton.clicked.connect(self.exit)
         self.anim2.finished.connect(self.endAnimation)
-
+        
         self.setWindowTitle("Printer")
         self.setGeometry(0, 0, SCREEN_X, SCREEN_Y)
         self.show()
@@ -119,6 +120,12 @@ class Screen(QWidget):
                                             xPos=SCREEN_X/6 - SCREEN_X/16.8, yPos=SCREEN_Y/2 - SCREEN_Y/25 - 15,
                                             font_size="20pt", background_color="#30f5ff",
                                             border_radius="8px")
+
+        self.exitbutton = PrinterButton("Exit", self,
+                                        width=SCREEN_X/8.4, height=SCREEN_Y/25,
+                                        xPos=SCREEN_X/6 - SCREEN_X/16.8, yPos=8*SCREEN_Y/10 - SCREEN_Y/50,
+                                        font_size="20pt", background_color="#fc3003",
+                                        border_radius="8px")
 
     def startButtonClicked(self):
         self.startbutton.setVisible(False)
@@ -201,7 +208,8 @@ class Screen(QWidget):
         self.label.setText(self.chooseWord())
         self.label.move(self.card_start_x, self.card_start_y)
 
-
+    def exit(self):
+        sys.exit(0)
 
 
 
