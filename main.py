@@ -83,49 +83,49 @@ class Screen(QWidget):
                                             width=SCREEN_X/8.4, height=SCREEN_Y/25,
                                             xPos=SCREEN_X/6 - SCREEN_X/16.8, yPos=SCREEN_Y/2,
                                             font_size="20pt", background_color="#77eb34",
-                                            border_radius="8px")
+                                            background_color_pressed="#449615", border_radius="8px")
 
         self.randombutton = PrinterButton("Randomize Words", self,
                                             width=SCREEN_X/8.4, height=SCREEN_Y/25,
                                             xPos=SCREEN_X/6 - SCREEN_X/16.8, yPos=SCREEN_Y/2 - SCREEN_Y/25 - 15,
                                             font_size="20pt", background_color="#f49eff",
-                                            border_radius="8px")
+                                            background_color_pressed="#a843cc", border_radius="8px")
 
         self.printbutton = PrinterButton("Print", self, visible=False,
                                             width=SCREEN_X/8.4, height=SCREEN_Y/25,
                                             xPos=SCREEN_X/6 - SCREEN_X/16.8, yPos=SCREEN_Y/2,
                                             font_size="20pt", background_color="#77eb34",
-                                            border_radius="8px")
+                                            background_color_pressed="#449615", border_radius="8px")
 
         self.print2button = PrinterButton("Finish Printing", self, visible=False,
                                             width=SCREEN_X/8.4, height=SCREEN_Y/25,
                                             xPos=SCREEN_X/6 - SCREEN_X/16.8, yPos=SCREEN_Y/2,
                                             font_size="20pt", background_color="#ff9717",
-                                            border_radius="8px")
+                                            background_color_pressed="#8f4f00", border_radius="8px")
 
         self.reprintbutton = PrinterButton("Print Again", self, visible=False,
                                             width=SCREEN_X/8.4, height=SCREEN_Y/25,
                                             xPos=SCREEN_X/6 - SCREEN_X/16.8, yPos=SCREEN_Y/2 + SCREEN_Y/25 + 15,
                                             font_size="20pt", background_color="#77eb34",
-                                            border_radius="8px")
+                                            background_color_pressed="#449615", border_radius="8px")
 
         self.nextbutton = PrinterButton("Next Page", self, visible=False,
                                             width=SCREEN_X/8.4, height=SCREEN_Y/25,
                                             xPos=SCREEN_X/6 - SCREEN_X/16.8, yPos=SCREEN_Y/2,
                                             font_size="20pt", background_color="#f49eff",
-                                            border_radius="8px")
+                                            background_color_pressed="#a843cc", border_radius="8px")
 
         self.restartbutton = PrinterButton("Restart", self, visible=False,
                                             width=SCREEN_X/8.4, height=SCREEN_Y/25,
                                             xPos=SCREEN_X/6 - SCREEN_X/16.8, yPos=SCREEN_Y/2 - SCREEN_Y/25 - 15,
                                             font_size="20pt", background_color="#30f5ff",
-                                            border_radius="8px")
+                                            background_color_pressed="17a6ff", border_radius="8px")
 
         self.exitbutton = PrinterButton("Exit", self,
                                         width=SCREEN_X/8.4, height=SCREEN_Y/25,
                                         xPos=SCREEN_X/6 - SCREEN_X/16.8, yPos=8*SCREEN_Y/10 - SCREEN_Y/50,
                                         font_size="20pt", background_color="#fc3003",
-                                        border_radius="8px")
+                                        background_color_pressed="a11216", border_radius="8px")
 
     def startButtonClicked(self):
         self.startbutton.setVisible(False)
