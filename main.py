@@ -22,6 +22,10 @@ class Screen(QWidget):
     card_start_y = SCREEN_Y/2 - card_h/2
     card_pause_x = SCREEN_X/2 - card_w/2
     card_pause_y = 0.4275*SCREEN_Y - card_h/2
+    card_pause2_x = SCREEN_X/2 - card_w/2
+    card_pause2_y = 0.4225*SCREEN_Y - card_h/2
+    card_pause3_x = SCREEN_X/2 - card_w/2
+    card_pause3_y = 0.4175*SCREEN_Y - card_h/2
     card_end_x = SCREEN_X/2 - card_w/2
     card_end_y = SCREEN_Y/6 - card_h/2
     speed = 1000
@@ -58,21 +62,31 @@ class Screen(QWidget):
                                         self.label.card_w, self.label.card_h))
         
         self.anim2 = QPropertyAnimation(self.label, b"geometry")
-        self.anim2.setDuration(self.speed)
-        self.anim2.setStartValue(QRect(self.card_pause_x, self.card_pause_y,
-                                      self.label.card_w, self.label.card_h))
-        self.anim2.setEndValue(QRect(self.card_end_x, self.card_end_y,
+        self.anim2.setDuration(200)
+        self.anim2.setEndValue(QRect(self.card_pause2_x, self.card_pause2_y,
+                                    self.label.card_w, self.label.card_h))
+        
+        self.anim3 = QPropertyAnimation(self.label, b"geometry")
+        self.anim3.setDuration(200)
+        self.anim3.setEndValue(QRect(self.card_pause3_x, self.card_pause3_y,
+                                     self.label.card_w, self.label.card_h))
+        
+        self.animFinish = QPropertyAnimation(self.label, b"geometry")
+        self.animFinish.setDuration(self.speed)
+        self.animFinish.setEndValue(QRect(self.card_end_x, self.card_end_y,
                                     self.label.card_w, self.label.card_h))
 
         self.startbutton.clicked.connect(self.startButtonClicked)
         self.randombutton.clicked.connect(self.randomButtonClicked)
         self.printbutton.clicked.connect(self.printButtonClicked)
         self.print2button.clicked.connect(self.print2ButtonClicked)
+        self.print3button.clicked.connect(self.print3ButtonClicked)
+        self.finishprintbutton.clicked.connect(self.finishprintButtonClicked)
         self.reprintbutton.clicked.connect(self.reprintButtonClicked)
         self.nextbutton.clicked.connect(self.nextButtonClicked)
         self.restartbutton.clicked.connect(self.restartButtonClicked)
         self.exitbutton.clicked.connect(self.exit)
-        self.anim2.finished.connect(self.endAnimation)
+        self.animFinish.finished.connect(self.endAnimation)
         
         self.setWindowTitle("Printer")
         self.setGeometry(0, 0, SCREEN_X, SCREEN_Y)
@@ -97,7 +111,19 @@ class Screen(QWidget):
                                             font_size="20pt", background_color="#77eb34",
                                             background_color_pressed="#449615", border_radius="8px")
 
-        self.print2button = PrinterButton("Finish Printing", self, visible=False,
+        self.print2button = PrinterButton("Print More", self, visible=False,
+                                            width=SCREEN_X/8.4, height=SCREEN_Y/25,
+                                            xPos=SCREEN_X/6 - SCREEN_X/16.8, yPos=SCREEN_Y/2 + SCREEN_Y/25 + 15,
+                                            font_size="20pt", background_color="#77eb34",
+                                            background_color_pressed="#449615", border_radius="8px")
+        
+        self.print3button = PrinterButton("Print More", self, visible=False,
+                                            width=SCREEN_X/8.4, height=SCREEN_Y/25,
+                                            xPos=SCREEN_X/6 - SCREEN_X/16.8, yPos=SCREEN_Y/2 + SCREEN_Y/25 + 15,
+                                            font_size="20pt", background_color="#77eb34",
+                                            background_color_pressed="#449615", border_radius="8px")
+
+        self.finishprintbutton = PrinterButton("Finish Printing", self, visible=False,
                                             width=SCREEN_X/8.4, height=SCREEN_Y/25,
                                             xPos=SCREEN_X/6 - SCREEN_X/16.8, yPos=SCREEN_Y/2,
                                             font_size="20pt", background_color="#ff9717",
@@ -122,10 +148,10 @@ class Screen(QWidget):
                                             background_color_pressed="17a6ff", border_radius="8px")
 
         self.exitbutton = PrinterButton("Exit", self,
-                                        width=SCREEN_X/8.4, height=SCREEN_Y/25,
-                                        xPos=SCREEN_X/6 - SCREEN_X/16.8, yPos=8*SCREEN_Y/10 - SCREEN_Y/50,
-                                        font_size="20pt", background_color="#fc3003",
-                                        background_color_pressed="a11216", border_radius="8px")
+                                            width=SCREEN_X/8.4, height=SCREEN_Y/25,
+                                            xPos=SCREEN_X/6 - SCREEN_X/16.8, yPos=8*SCREEN_Y/10 - SCREEN_Y/50,
+                                            font_size="20pt", background_color="#fc3003",
+                                            background_color_pressed="a11216", border_radius="8px")
 
     def startButtonClicked(self):
         self.startbutton.setVisible(False)
@@ -142,25 +168,48 @@ class Screen(QWidget):
         self.anim.start()
         self.printbutton.setVisible(False)
         self.print2button.setVisible(True)
+        self.finishprintbutton.setVisible(True)
     
     def print2ButtonClicked(self):
         if self.anim.state() == 2:
             return
+        self.anim2.setStartValue(QRect(self.label.x(), self.label.y(),
+                                            self.label.card_w, self.label.card_h))
         self.anim2.start()
+        self.print2button.setVisible(False)
+        self.print3button.setVisible(True)
+    
+    def print3ButtonClicked(self):
+        if self.anim2.state() == 2:
+            return
+        self.anim3.setStartValue(QRect(self.label.x(), self.label.y(),
+                                       self.label.card_w, self.label.card_h))
+        self.anim3.start()
+        self.print3button.setVisible(False)
+
+    def finishprintButtonClicked(self):
+        if (self.anim.state() == 2 or self.anim2.state() == 2
+                or self.anim3.state() == 2):
+            return
+        self.animFinish.setStartValue(QRect(self.label.x(), self.label.y(),
+                                       self.label.card_w, self.label.card_h))
+        self.animFinish.start()
         self.printbutton.setVisible(False)
         self.print2button.setVisible(False)
+        self.print3button.setVisible(False)
+        self.finishprintbutton.setVisible(False)
         self.nextbutton.setVisible(True)
         self.reprintbutton.setVisible(True)
 
     def reprintButtonClicked(self):
-        if self.anim2.state() == 2:
+        if self.animFinish.state() == 2:
             return
         global INDEX
         INDEX -= 1
         self.nextButtonClicked()
 
     def nextButtonClicked(self):
-        if self.anim2.state() == 2:
+        if self.animFinish.state() == 2:
             return
         if INDEX >= len(WORDS):
             self.restartbutton.setVisible(True)
@@ -179,7 +228,7 @@ class Screen(QWidget):
 
     def endAnimation(self):
         self.printbutton.setVisible(False)
-        self.print2button.setVisible(False)
+        self.finishprintbutton.setVisible(False)
         self.nextbutton.setVisible(True)
         self.reprintbutton.setVisible(True)
 
@@ -202,7 +251,7 @@ class Screen(QWidget):
             self.restartbutton.setVisible(True)
         self.gameover.setVisible(False)
         self.anim.setCurrentTime(0)
-        self.anim2.setCurrentTime(0)
+        self.animFinish.setCurrentTime(0)
         self.reprintbutton.setVisible(False)
         self.nextbutton.setVisible(False)
         self.label.setText(self.chooseWord())
